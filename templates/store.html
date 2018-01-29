@@ -1,0 +1,74 @@
+
+<p class="text-info">
+  Welcome to the Angular Store<br />
+  Please select the products you want …<br /></p>
+<p>
+
+<div ng-controller="ResponseController" data-ng-init="read()">
+
+<p id="search">Search: <input type="text" ng-model="test" class="form-control"></p>
+
+   <ul ng-repeat="x in result  | filter:test">
+        <li > <img src={{x.img}} class="img-rounded" height="70" width="70" alt="logo"/>
+
+        <a ng-click= "show(x)" href="#!Details" class="name"><span><b>{{x.name}}</b></span></a>
+
+        &nbsp&nbsp<img  ng-click= "edit(x)" src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-10/24/Pencil-icon.png"  ng-show="detail" style="cursor: pointer;">
+
+        &nbsp&nbsp&nbsp&nbsp<span ng-click="deleteProduct(x.name)" ng-show="delete" style="color: red; cursor: pointer; font-size: large;">X</span>
+        </li>
+   </ul>
+
+   <div class="add">
+      <button ng-show="show1" ng-click="toggle()" style="cursor: pointer;">Add Product</button>
+      <div ng-show="show2">
+        <form ng-submit="create()">
+
+            <h3 class="text-center">Add New Product</h3>
+            Name: <input type="text" name="name" placeholder="Apple" ng-model="data.name"><br>
+            Tagline: <input type="text" name="tagline" placeholder="An apple a day keeps doctor away" ng-model="data.tagline"><br>
+            Price: <input type="number" name="price" ng-model="data.price"><br>
+            Stock: <input type="number" name="stock" ng-model="data.stock"><br>
+            Fiber: <input type="text" name="fiber" placeholder="High,Average,Low" ng-model="data.fiber"><br>
+            Potassium: <input type="text" name="potassium" placeholder="High,Average,Low" ng-model="data.potassium"><br>
+            Vitamin: <input type="text" name="vitamin" placeholder="High,Average,Low" ng-model="data.vitamin"><br>
+            Energy: <input type="number" name="energy" ng-model="data.energy"><br>
+            Image: <input type="text" name="img" ng-model="data.img"><br>
+
+            <input type="submit" value="Add" ngClick="Submit">
+            <input type="button" value="Cancel" ng-click="toggle()">
+        </form>
+      </div>
+   </div>
+
+   <div class="update">
+      <div ng-show="show3">
+        <form ng-submit="update()">
+
+            <h3 class="text-center">Update Product Details</h3>
+            Name: <input type="text" name="name" placeholder="Apple" ng-model="data.name" value="{{data.name}}"><br>
+            Tagline: <input type="text" name="tagline" placeholder="An apple a day keeps doctor away" ng-model="data.tagline" value="{{data.tagline}}"><br>
+            Price: <input type="number" name="price" ng-model="data.price" value="{{data.price}}"><br>
+            Stock: <input type="number" name="stock" ng-model="data.stock" value="{{data.stock}}"><br>
+
+      
+            Fiber: <input type="text" name="fiber" placeholder="High,Average,Low" ng-model="data.fiber" value="{{data.fiber}}"><br>
+            Potassium: <input type="text" name="potassium" placeholder="High,Average,Low" ng-model="data.potassium" value="{{data.potassium}}"><br>
+
+            Vitamin: <input type="text" name="vitamin" placeholder="High,Average,Low" ng-model="data.vitamin" value="{{data.vitamin}}" ><br>
+            Energy: <input type="number" name="energy" ng-model="data.energy" value="{{data.energy}}"><br>
+
+            Image: <input type="text" name="img" ng-model="data.img" value="{{data.img}}"><br>
+
+            <input type="submit" value="Update" ngClick="Submit">
+            <input type="button" value="Cancel" ng-click="cancel()">
+
+
+         </form>
+      </div>
+      
+   </div>
+
+</div>
+      
+

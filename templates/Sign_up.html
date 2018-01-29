@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+
+<head>
+	<title>Sign up</title>
+</head>
+
+<body style="background-color: azure;">
+
+
+<div id="logged_in" class="container">
+	<h3 id="heading">Sign Up</h3>
+
+  <form class="form-horizontal" action="#">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required style="width: 250px;">
+      </div>
+    </div>
+    <div class="form-group" id="pass">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-10">          
+        <input type="password" class="form-control" id="password" placeholder="Enter password" required style="width: 250px;">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" id="bttn1" onclick="Sign_up()">Submit</button>
+        <button type="submit" class="btn btn-default" id="bttn2" style="display: none;" onclick="send_link()">Send verification link</button>        
+      </div>
+    </div>
+  </form>
+
+  <div class="links" style="display: inline-flex;">
+    <p id="link1" style="margin-left: 195px;"><a href="Log_in.html">Already have an account ?</a></p>
+    <p style="margin-left: 20px;"><a href="#" onclick="reset()">Forgot Password ?</a></p>
+  </div>
+
+</div>
+
+
+ <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script src="script/firebase_initialization.js"></script>
+<script src="script/Sign_up.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<!-- <script src="Details.js" type="text/javascript"></script>
+ -->
+<body ng-app="Shopping_Cart">
+
+<!-- <div ng-view></div>
+ --><div ng-controller="ResponseController">
+{{content}}
+   <ul ng-repeat="x in result">
+        <li >{{x.name}}    {{x.price}}
+<!--         <a href="#!read#!{{x.name}}"><span ng-click="showDetails(x)">{{x.name}}    {{x.price}} </span></a>
+ -->        &nbsp&nbsp<img  ng-click= "edit(x)" src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-10/24/Pencil-icon.png">
+        &nbsp&nbsp&nbsp&nbsp<span ng-click="deleteProduct(x.name)" style="color: red; cursor: pointer;">x</span>
+        </li>
+   </ul>
+
+   <div class="add">
+      <button ng-show="show1" ng-click="show()" style="cursor: pointer;">Add Product</button>
+      <div ng-show="show2">
+      <form ng-submit="create()">
+
+            Name: <input type="text" name="name" placeholder="Apple" ng-model="data.name"><br>
+            Tagline: <input type="text" name="tagline" placeholder="An apple a day keeps doctor away" ng-model="data.tagline"><br>
+            Price: <input type="number" name="price" ng-model="data.price"><br>
+            Stock: <input type="number" name="stock" ng-model="data.stock"><br>
+            Calories: <input type="number" name="calories" ng-model="data.calories"><br>
+            Fiber: <input type="text" name="fiber" placeholder="High,Average,Low" ng-model="data.fiber"><br>
+            Potassium: <input type="text" name="potassium" placeholder="High,Average,Low" ng-model="data.potassium"><br>
+            Vitamin: <input type="text" name="vitamin" placeholder="High,Average,Low" ng-model="data.vitamin"><br>
+            Energy: <input type="number" name="energy" ng-model="data.energy"><br>
+
+            <input type="submit" value="Add" ngClick="Submit">
+      </form>
+      </div>
+   </div>
+
+   <div class="update">
+
+      <div ng-show="show3">
+      <form ng-submit="update()">
+
+            <h3 class="text-center">Update Product Details</h3>
+            Name: <input type="text" name="name" placeholder="Apple" ng-model="data.name" value="{{data.name}}"><br>
+            Tagline: <input type="text" name="tagline" placeholder="An apple a day keeps doctor away" ng-model="data.tagline" value="{{data.tagline}}"><br>
+            Price: <input type="number" name="price" ng-model="data.price" value="{{data.price}}"><br>
+            Stock: <input type="number" name="stock" ng-model="data.stock" value="{{data.stock}}"><br>
+            Calories: <input type="number" name="calories" ng-model="data.calories" value="{{data.calories}}"><br>
+            Fiber: <input type="text" name="fiber" placeholder="High,Average,Low" ng-model="data.fiber" value="{{data.fiber}}"><br>
+            Potassium: <input type="text" name="potassium" placeholder="High,Average,Low" ng-model="data.potassium" value="{{data.potassium}}"><br>
+            Vitamin: <input type="text" name="vitamin" placeholder="High,Average,Low" ng-model="data.vitamin" value="{{data.vitamin}}" ><br>
+            Energy: <input type="number" name="energy" ng-model="data.energy" value="{{data.energy}}"><br>
+
+            <input type="submit" value="Update" ngClick="Submit">
+
+      </form>
+      </div>
+      
+   </div>
+
+</div>
+      
+      <script>
+      'use strict'; //Defines that JavaScript code should be executed in "strict mode"
+      var app = angular.module("Shopping_Cart");
+
+
+      // app.config(function($routeProvider) {
+      //    $routeProvider
+      //    .when("/read/:productName", {
+      //          templateUrl : "/Details.html",
+      //       });
+      // });
+          
+      app.controller("ResponseController", function($scope, $http){
+
+         /*$http directive is used to communicate ot the server */
+         $scope.data = {}; 
+         $scope.productname = "";
+
+          $scope.show1 = true;
+          $scope.show2 = $scope.show3 = false;
+
+          $scope.show = function(){
+            $scope.show1 = !$scope.show1;
+            $scope.show2 = !$scope.show2;
+          };
+          
+          // Read all products
+          $scope.read = function(){
+            console.log("hello");
+            $http.get("/read").then(function(response){
+               $scope.result =  response.data.result;
+            },
+            function(error){
+               console.log('Error: ' + data);
+               $scope.content = "Something went wrong";
+            });
+
+        };
+
+        // When first time link '/' opens
+        $scope.read();
+
+          // delete a todo after checking it
+        $scope.deleteProduct = function(id) {
+          $http.delete("/delete/" + id).then(function(response) {
+                alert(response.data.message);
+                //$scope.content = "Done";
+                $scope.read();
+
+            },
+            function(error) {
+               console.log('Error: ' + data);
+               $scope.content = "Something went wrong";
+               // alert("Something went wrong");
+            });
+         };
+
+           // when submitting the add form, send the text to the node API
+        $scope.create = function() {
+
+            var posting = $http({
+                          method: 'POST',
+                          url: '/add',
+                          data: $scope.data,
+            });
+            posting.then(function (response) {
+                $scope.data = {};
+                $scope.content = response.data.name;
+                $scope.read();
+                $scope.show();
+
+             },
+              function (data) {
+                console.log('Error: ' + data);
+                $scope.content = "Something went wrong";
+             });
+          };
+
+
+        $scope.edit = function(product){
+
+              $scope.data = product;
+              $scope.show3 = !$scope.show3;
+              $scope.show1 = !$scope.show1;
+              $scope.productname = $scope.data.name;
+        };
+
+        $scope.update = function(){
+
+              var posting = $http({
+                          method: 'PUT',
+                          url: '/update/' + productname,
+                          data: $scope.data,
+            });
+            posting.then(function (response) {
+                $scope.data = {};
+                $scope.content = response.data.name;
+                $scope.read();
+                $scope.show();
+                $scope.show3 = !$scope.show3;
+                $scope.show1 = !$scope.show1;
+
+             },
+              function (data) {
+                console.log('Error: ' + data);
+                $scope.content = "Something went wrong";
+             });
+
+        };
+
+
+
+        // $scope.showDetails = function(product){
+        //       console.log("YES");
+        //     $http.get("/read/" + product.name).then(function(response){
+        //        $scope.result =  response.data.result;
+        //     },
+        //     function(error){
+        //        console.log('Error: ' + data);
+        //        $scope.content = "Something went wrong";
+        //     });
+               
+        // };
+
+});
+         
+         
+      </script>
+      
+</body>
+</html>

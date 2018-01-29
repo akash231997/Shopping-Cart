@@ -1,0 +1,53 @@
+
+<div  data-ng-init="showDetails()">
+    <span class="name">
+       <h3 class="text-center">{{result.name}}</h3>
+    </span>
+
+    <div class="img-thumbnail">
+      <img ng-src="{{result.img}}" height="100" width="100" alt="{{result.name}}" />
+      <span id="tag">
+          <b>{{result.tagline}}</b>
+      </span>
+    </div>
+    
+
+
+    <div class="one">  
+    <table class="table table-striped">
+      <tbody>
+          <tr>
+             <td class="heading"><b>Fiber</b></td>
+             <td class="value">{{result.fiber}}</td>
+          </tr>
+          <tr>
+             <td class="heading"><b>Energy</b></td>
+             <td class="value">{{result.energy}} Kcal</td>
+          </tr>
+          <tr>
+             <td class="heading"><b>Potassium</b></td>
+             <td class="value">{{result.potassium}}</td>
+          </tr>
+          <tr>
+             <td class="heading"><b>Vitamin</b></td>
+             <td class="value">{{result.vitamin}}</td>
+          </tr>
+
+          <tr>
+           <td class="heading"><b>Price:</b></td> 
+           <td class="value">{{result.price | currency}}</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <div class="side_button">
+        <button class="two" id="{{result.name}}"  onclick = "add(this.id)"><img src="http://www.sprinkleracademy.com/themes/sprinkler_2013/images/white-cart.png" height="25" width="25"/>  Add to cart</button>
+        <div id="snackbar">{{result.name}} added to cart</div><br>
+
+        <a href="#"><button class="three" >Back to store</button></a><br>
+        <a href="#!Cart" ><button class="four" ><span>Go to cart</span></button></a>
+    </div>
+
+
+</div>
+

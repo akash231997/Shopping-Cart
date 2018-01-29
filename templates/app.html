@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="utf-8"> 
+<!-- Angular CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script src="script/firebase_initialization.js"></script>
+
+<script src="script/Sign_up.js"></script>
+<script src="script/basic_function.js"></script>
+<script src="script/cart.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/app_style.css">
+<link rel="stylesheet" type="text/css" href="css/detail_style.css">
+<link rel="stylesheet" type="text/css" href="css/cart.css">
+
+
+<body ng-app="Shopping_Cart" >
+
+<div id="logged_out" style="position: absolute;top: 0;right: 0;margin: 7px;">
+  <h4 style="display: inline;">Welcome  <span id="userId"></span> </h4>
+  <button onclick="LogOut()" class="btn btn-info">Log Out
+  </button>
+</div><br>
+
+ <div class="container-fluid" ng-controller="ResponseController">
+  
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <h1 class="well">
+                        <img src="https://image.shutterstock.com/z/stock-photo-creative-logo-for-fruit-shop-illustration-isolated-on-white-background-610027250.jpg" height="130" width="130" alt="logo"/>
+                    Angular Store 
+                </h1>
+                <div ng-view></div>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
