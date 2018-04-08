@@ -3,7 +3,7 @@ var product = require('../model/model.js');
 exports.add = function(req, res) {
     // Create and Save a new product
 
-    console.log("here babe");
+    console.log("here");
     if(!req.body.name) {
         res.status(400).send({message: "Note can not be empty"});
     }
